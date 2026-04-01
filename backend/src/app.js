@@ -12,7 +12,7 @@ sequelize.sync({ alter: true })
 app.use(cors("*"));
 app.use(helemet())  
 app.get("/", (req, res) => {
-  res.send("API running");
+  res.send("Welcome to StockFlow");
 });
 
 // routes
