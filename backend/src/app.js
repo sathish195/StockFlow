@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 sequelize.sync({ alter: true })
 app.use(cors("*"));
-
+app.use(helemet())  
 app.get("/", (req, res) => {
   res.send("API running");
 });
