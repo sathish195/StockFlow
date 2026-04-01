@@ -4,10 +4,12 @@ const express = require("express");
 const authRoutes = require("./routes/authRoutes");
 const productsRoutes = require("./routes/productsRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
+const cors = require("cors");
 const sequelize = require("./db");
 const app = express();
 app.use(express.json());
 sequelize.sync({ alter: true })
+app.use(cors("*"));
 
 app.get("/", (req, res) => {
   res.send("API running");

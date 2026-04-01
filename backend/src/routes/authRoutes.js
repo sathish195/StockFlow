@@ -10,10 +10,10 @@ const { or } = require("sequelize");
 router.post("/signup", async (req, res) => {
 
   try {
-     const { error } = signup(req.body);
+     const { error,value } = signup(req.body);
     if (error) {
       return res.status(400).json({ message: error.details[0].message });}
-  const { name, email, password, organizationName } = req.body;
+  const { name, email, password, organizationName } = value;
 
     // Check user exists
     const existingUser = await User.findOne({ where: { email } });
@@ -53,10 +53,11 @@ console.log(user,"------------");
 
 router.post("/login", async (req, res) => {
     try {
-        const { error } = loging(req.body);
+        const { error ,value} = loging(req.body);
         if (error) {
           return res.status(400).json({ message: error.details[0].message });}
-      const { email, password } = req.body;
+          console.log(value,"------------------");
+      const { email, password } = value;
   
       // 🔥 JOIN User + Organization
       const user = await User.findOne({

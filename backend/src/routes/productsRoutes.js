@@ -12,13 +12,13 @@ router.post("/", auth, async (req, res) => {
   console.log("Creating product with data:", req.body,req.user);
   try {
  
-    const { error } = productSchema(req.body);
+    const { error,value } = productSchema(req.body);
     if (error) {
       return res.status(400).json({ message: error.details[0].message });}
   
       const checkProduct = await Product.findOne({
         where: {
-          sku: req.body.sku,
+          sku:value.sku,
           organizationId: req.user.organizationId,
         },
       }
@@ -32,7 +32,7 @@ router.post("/", auth, async (req, res) => {
       };
 
     const product = await Product.create({
-      ...req.body,
+      ...value,
       organizationId: req.user.organizationId,
     });
 
@@ -134,7 +134,7 @@ router.put("/:id", auth, async (req, res) => {
       });
     }
 
-    await product.update(req.body);
+    await product.update(value);
 
     return res.status(200).json({
       success: true,
