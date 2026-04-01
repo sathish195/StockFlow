@@ -111,7 +111,7 @@ router.get("/:id", auth, async (req, res) => {
 //  UPDATE PRODUCT
 router.put("/:id", auth, async (req, res) => {
   try {
-    const { error } = productSchema(req.body);
+    const { error,value } = productSchema(req.body);
 
     if (error) {
       return res.status(400).json({
@@ -119,6 +119,7 @@ router.put("/:id", auth, async (req, res) => {
         message: error.details[0].message,
       });
     }
+
 
     const product = await Product.findOne({
       where: {
@@ -133,7 +134,6 @@ router.put("/:id", auth, async (req, res) => {
         message: "Product not found",
       });
     }
-
     await product.update(value);
 
     return res.status(200).json({

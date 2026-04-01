@@ -56,7 +56,6 @@ router.post("/login", async (req, res) => {
         const { error ,value} = loging(req.body);
         if (error) {
           return res.status(400).json({ message: error.details[0].message });}
-          console.log(value,"------------------");
       const { email, password } = value;
   
       // 🔥 JOIN User + Organization
