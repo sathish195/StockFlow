@@ -1,6 +1,6 @@
 require("dotenv").config(); 
 const express = require("express");
-// require("./db"); // just call the file (auto connects)
+const helemet = require("helmet");
 const authRoutes = require("./routes/authRoutes");
 const productsRoutes = require("./routes/productsRoutes");
 const dashboardRoutes = require("./routes/dashboardRoutes");
